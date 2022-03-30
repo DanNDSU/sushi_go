@@ -47,8 +47,12 @@ class QPlayer(BasePlayer):
         for state in self.states_in_game[::-1]:
             if state not in self.model_dict:
                 self.model_dict[state] = 0
+                print(state)
             self.model_dict[state] += (reward - self.model_dict[state]) * self.lr
+            print(self.model_dict[state])
             reward *= self.decay_gamma
+
+            print(self.model_dict)
 
     def prepare_for_next_round(self):
         super().prepare_for_next_round()
