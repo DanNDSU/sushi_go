@@ -43,7 +43,9 @@ class QPlayer(BasePlayer):
     def get_score(self):
         return get_score(self.board)
 
+    #This function is what calculates the reward - the database connection could go here.
     def feed_reward(self, reward):
+        print(self.name)
         for state in self.states_in_game[::-1]:
             if state not in self.model_dict:
                 self.model_dict[state] = 0
@@ -53,6 +55,7 @@ class QPlayer(BasePlayer):
             reward *= self.decay_gamma
 
             print(self.model_dict)
+            print()
 
     def prepare_for_next_round(self):
         super().prepare_for_next_round()
