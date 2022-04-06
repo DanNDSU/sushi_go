@@ -87,16 +87,23 @@ class State:
 
 from Player import *
 if __name__ == '__main__':
-    card_pool = []
-    card_pool.extend([0] * 0)
-    card_pool.extend([1] * 10)
+    
+    
+    """ card_pool = []
+    card_pool.extend([0] * 14)
+    card_pool.extend([1] * 5)
     card_pool.extend([2] * 10)
-    card_pool.extend([3] * 10)
-    card_pool.extend([7] * 30)  # Wasabi
-    card_pool.extend([8] * 0)  # Tempura
-
-    state = State(card_pool)
-    p1 = QPlayer("Dan")
+    card_pool.extend([3] * 5)
+    card_pool.extend([4] * 6)
+    card_pool.extend([5] * 14)
+    card_pool.extend([6] * 14)
+    card_pool.extend([7] * 6)
+    card_pool.extend([8] * 12)
+    card_pool.extend([9] * 8)
+    card_pool.extend([10] * 10) """
+    state = State(get_actual_card_pool())
+    #state = State(card_pool)
+    p1 = HumanPlayer("Dan")
     p2 = QPlayer("Manveer")
     #p3 = QPlayer("Joe")
     state.add_player(p1)
