@@ -1,5 +1,6 @@
 from utils import *
 from Player import BasePlayer
+from DBUtils import *
 
 
 class QPlayer(BasePlayer):
@@ -45,17 +46,23 @@ class QPlayer(BasePlayer):
 
     #This function is what calculates the reward - the database connection could go here.
     def feed_reward(self, reward):
+        db = DBUtils()
         #print(self.name)
         for state in self.states_in_game[::-1]:
             if state not in self.model_dict:
                 self.model_dict[state] = 0
-                print(state)
+                print("State"+str(state))
             self.model_dict[state] += (reward - self.model_dict[state]) * self.lr
-            print(self.model_dict[state])
+            q_state = str(state)
+            qValue = str(self.model_dict[state])
+            db.addDataToDb(curr_state=q_state, q_value=qValue)
+            print("Model dict"+str(self.model_dict[state]))
             reward *= self.decay_gamma
+            print("reward" + str(reward))
 
-            print(self.model_dict)
+          #  print(self.model_dict)
             print()
+        db.dbCommit()
 
     def prepare_for_next_round(self):
         super().prepare_for_next_round()

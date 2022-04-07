@@ -103,7 +103,7 @@ if __name__ == '__main__':
     card_pool.extend([10] * 10) """
     state = State(get_actual_card_pool())
     #state = State(card_pool)
-    p1 = HumanPlayer("Dan")
+    p1 = QPlayer("Dan")
     p2 = QPlayer("Manveer")
     #p3 = QPlayer("Joe")
     state.add_player(p1)
