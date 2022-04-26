@@ -66,7 +66,7 @@ class State:
             else:
                 p.feed_reward(-1)
 
-    def play_games(self, num_of_games=1, round_per_game=1, output_result=False):
+    def play_games(self, num_of_games=1, round_per_game=3, output_result=False):
         self.stats = [0] * len(self.players)
         for i in range(num_of_games):
             self.refresh_state()
@@ -86,9 +86,7 @@ class State:
 
 
 from Player import *
-if __name__ == '__main__':
-    
-    
+if __name__ == '__main__':   
     """ card_pool = []
     card_pool.extend([0] * 14)
     card_pool.extend([1] * 5)
@@ -102,10 +100,10 @@ if __name__ == '__main__':
     card_pool.extend([9] * 8)
     card_pool.extend([10] * 10) """
     state = State(get_actual_card_pool())
-    #state = State(card_pool)
-    p1 = QPlayer("Dan")
+    
+    p1 = QStatePlayer("Dan")
     p2 = QPlayer("Manveer")
-    #p3 = QPlayer("Joe")
+    
     state.add_player(p1)
     state.add_player(p2)
     state.play_games(1)
@@ -113,5 +111,4 @@ if __name__ == '__main__':
     print(p1.board)
     print("Manveer's Score: " + str(p2.get_score()))
     print(p2.board)
-    #print("Joe's Score: " + str(p3.get_score()))
-    #print(p3.board)
+    
