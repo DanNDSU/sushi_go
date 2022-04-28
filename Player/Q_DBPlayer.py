@@ -53,8 +53,8 @@ class Q_DBPlayer(BasePlayer):
         for state in self.states_in_game[::-1]:
             if state not in self.model_dict:
                 self.model_dict[state] = 0
-                #print("State: "+str(state))
-            self.model_dict[state] += (reward - self.model_dict[state]) * self.lr
+                print("State"+str(state))
+            self.model_dict[state] = (1-self.lr) * self.model_dict[state] + (self.lr * reward)
             q_state = str(state)
             qValue = str(self.model_dict[state])
             self.db.addDataToDb(curr_state=q_state, q_value=qValue)

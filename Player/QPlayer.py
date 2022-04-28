@@ -7,7 +7,7 @@ class QPlayer(BasePlayer):
     def __init__(self, name):
         super().__init__(name)
         self.decay_gamma = 0.9
-        self.lr = 0.01
+        self.lr = 0.7
         self.exp_rate = 0.3
         self.hits = 0
         self.querys = 0
@@ -50,7 +50,8 @@ class QPlayer(BasePlayer):
             if state not in self.model_dict:
                 self.model_dict[state] = 0
                 #print("State: "+str(state))
-            self.model_dict[state] += (reward - self.model_dict[state]) * self.lr
+            #self.model_dict[state] += (reward - self.model_dict[state]) * self.lr
+            self.model_dict[state] = (1-self.lr) * self.model_dict[state] + (self.lr * reward)
             #print("Model dict"+str(self.model_dict[state]))
             reward *= self.decay_gamma
             #print("Reward: " + str(reward))
