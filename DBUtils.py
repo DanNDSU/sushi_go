@@ -17,7 +17,7 @@ class DBUtils:
     
 
 
-    def addDataToDb(self, curr_state, q_value, db_cursor):
+    def addDataToDb(self, curr_state, q_value):
         db_cursor=self.db_cursor
         selectQuery = 'Select count(*) from q_table where state = %s;'
         db_cursor.execute(selectQuery,[curr_state])
