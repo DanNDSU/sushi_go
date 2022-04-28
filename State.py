@@ -60,9 +60,10 @@ class State:
             print(self.scoreboard, max_score)
 
         for i, p in enumerate(self.players):
+            p.feed_reward_score(p.get_score() / 10)
             if self.scoreboard[i] == max_score:
                 self.stats[i] += 1
-                p.feed_reward(max(1, len(self.players) - 1))  # If there are more than one opponent, put more reward for a win
+                p.feed_reward(max(1, len(self.players) - 1))  # If there are more than one opponent, put more reward for a win   
             else:
                 p.feed_reward(-1)
 
@@ -101,7 +102,7 @@ if __name__ == '__main__':
     card_pool.extend([10] * 10) """
     state = State(get_actual_card_pool())
     
-    p1 = QStatePlayer("Dan")
+    p1 = QRewardPlayer("Dan")
     p2 = QPlayer("Manveer")
     
     state.add_player(p1)

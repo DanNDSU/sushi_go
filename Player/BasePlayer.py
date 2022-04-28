@@ -22,6 +22,11 @@ class BasePlayer:
         # Defaults to not learning
         return
 
+    # this is used for QRewardPlayer, other players don't learn from it.
+    def feed_reward_score(self, reward):
+        return 
+
+
     def prepare_for_next_round(self):
         self.hand = []
         pudding_count = self.board[11]
