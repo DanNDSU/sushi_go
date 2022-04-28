@@ -3,7 +3,7 @@ from Player import BasePlayer
 from DBUtils import *
 
 
-class Q_DB_Player(BasePlayer):
+class Q_DBPlayer(BasePlayer):
 
     def __init__(self, name):
         self.db= DBUtils()
@@ -13,9 +13,8 @@ class Q_DB_Player(BasePlayer):
         self.exp_rate = 0.3
         self.hits = 0
         self.querys = 0
-        self.cursor= self.db.db_cursor
 
-        self.model_dict = self.db.fetchData(self.cursor)
+        self.model_dict = self.db.fetchData()
 
         self.prepare_for_next_round()
 
@@ -37,6 +36,7 @@ class Q_DB_Player(BasePlayer):
                 action = possible_next_card
 
         # Take a card based on action
+        #print("action is" + str(action))
         self.hand.remove(action)
         add_a_card_to_board(self.board, action)
 
@@ -48,8 +48,8 @@ class Q_DB_Player(BasePlayer):
 
     #This function is what calculates the reward - the database connection could go here.
     def feed_reward(self, reward):
-        #db = DBUtils()
         #print(self.name)
+        #db = DBUtils()
         for state in self.states_in_game[::-1]:
             if state not in self.model_dict:
                 self.model_dict[state] = 0
@@ -60,10 +60,10 @@ class Q_DB_Player(BasePlayer):
             self.db.addDataToDb(curr_state=q_state, q_value=qValue)
             #print("Model dict"+str(self.model_dict[state]))
             reward *= self.decay_gamma
-            print("reward" + str(reward))
+            #print("Reward: " + str(reward))
 
           #  print(self.model_dict)
-            print()
+            #print()
         self.db.dbCommit()
 
     def prepare_for_next_round(self):
