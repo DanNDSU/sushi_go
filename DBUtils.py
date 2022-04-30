@@ -15,7 +15,7 @@ class DBUtils:
         self.db_cursor = self.db_conn.cursor()
         self.db_cursor.execute('select version()')
         data = self.db_cursor.fetchone()
-        print("Connection established to: ",data)
+        #print("Connection established to: ",data)
     
 
     def returnCursor(self):
