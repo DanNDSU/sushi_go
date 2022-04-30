@@ -47,9 +47,9 @@ class State:
                 self.scoreboard[i] += maki_score[i]
 
         # Adjustment for Pudding
-        pudding_score = get_pudding_score([_.board[11] for _ in self.players])
+        """ pudding_score = get_pudding_score([_.board[11] for _ in self.players])
         for i in range(len(pudding_score)):
-            self.scoreboard[i] += pudding_score[i]
+            self.scoreboard[i] += pudding_score[i] """
 
         max_score = max(self.scoreboard)
         if output_result:
@@ -66,8 +66,8 @@ class State:
                 p.feed_reward(max(1, len(self.players) - 1))  # If there are more than one opponent, put more reward for a win   
             else:
                 p.feed_reward(-1)
-
-    def play_games(self, num_of_games=1, round_per_game=3, output_result=False):
+    #round_per_game is 3 in the original
+    def play_games(self, num_of_games=1, round_per_game=1, output_result=False):
         self.stats = [0] * len(self.players)
         for i in range(num_of_games):
             self.refresh_state()
@@ -103,11 +103,11 @@ if __name__ == '__main__':
     state = State(get_actual_card_pool())
     
     p1 = QRewardPlayer("Dan")
-    p2 = QPlayer("Manveer")
+    p2 = QRewardPlayer("Manveer")
     
     state.add_player(p1)
     state.add_player(p2)
-    state.play_games(1)
+    state.play_games(1, round_per_game=1)
     print("Dan's Score: " + str(p1.get_score()))
     print(p1.board)
     print("Manveer's Score: " + str(p2.get_score()))

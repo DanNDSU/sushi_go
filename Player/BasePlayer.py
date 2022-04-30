@@ -29,9 +29,9 @@ class BasePlayer:
 
     def prepare_for_next_round(self):
         self.hand = []
-        pudding_count = self.board[11]
+        #pudding_count = self.board[11]
         self.board = [0] * len(CARD_ON_BOARD)
-        self.board[11] = pudding_count
+        #self.board[11] = pudding_count
 
     def prepare_for_next_game(self):
         self.hand = []
