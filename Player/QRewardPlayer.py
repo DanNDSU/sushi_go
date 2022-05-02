@@ -50,13 +50,12 @@ class QRewardPlayer(BasePlayer):
             if state not in self.model_dict:
                 self.model_dict[state] = 0
                 #print("State: "+str(state))
-            #self.model_dict[state] += (reward - self.model_dict[state]) * self.lr
             self.model_dict[state] = (1-self.lr) * self.model_dict[state] + (self.lr * reward)
-            #print("Model dict"+str(self.model_dict[state]))
+            #print("Model dict "+str(self.model_dict[state]))
             reward *= self.decay_gamma
             #print("Reward: " + str(reward))
 
-          #  print(self.model_dict)
+            #print(self.model_dict)
             #print()
 
     def prepare_for_next_round(self):
