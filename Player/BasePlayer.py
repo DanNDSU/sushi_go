@@ -26,6 +26,8 @@ class BasePlayer:
     def feed_reward_score(self, reward):
         return 
 
+    def feed_reward_score_plus_minus(self, reward):
+        return
 
     def prepare_for_next_round(self):
         self.hand = []

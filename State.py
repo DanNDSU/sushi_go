@@ -64,8 +64,11 @@ class State:
             if self.scoreboard[i] == max_score:
                 self.stats[i] += 1
                 p.feed_reward(max(1, len(self.players) - 1))  # If there are more than one opponent, put more reward for a win   
+                p.feed_reward_score_plus_minus(p.get_score() / 10 + (max(1, len(self.players) - 1)))
+                
             else:
                 p.feed_reward(-1)
+                p.feed_reward_score_plus_minus(p.get_score() - 1)
     #round_per_game is 3 in the original
     def play_games(self, num_of_games=1, round_per_game=1, output_result=False):
         self.stats = [0] * len(self.players)
@@ -102,8 +105,8 @@ if __name__ == '__main__':
     card_pool.extend([10] * 10) """
     state = State(get_actual_card_pool())
     
-    p1 = QRewardPlayer("Dan")
-    p2 = QRewardPlayer("Manveer")
+    p1 = QPlayer("Dan")
+    p2 = QRewardPlayer2("Manveer")
     
     state.add_player(p1)
     state.add_player(p2)
