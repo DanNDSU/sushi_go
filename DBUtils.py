@@ -14,7 +14,9 @@ class DBUtils:
         self.db_conn = psycopg2.connect(host=self.t_host, port=self.t_port, dbname=self.t_dbname, user=self.t_user, password=self.t_pw)
         self.db_cursor = self.db_conn.cursor()
         self.db_cursor.execute('select version()')
-        data = self.db_cursor.fetchone()
+        self.db_cursor.execute('''create table if not exists q_state_player(state varchar(500), q_value varchar(500))''')
+        self.db_cursor.execute('''create table if not exists q_table(state varchar(500), q_value varchar(500))''')
+        #data = self.db_cursor.fetchone()
         #print("Connection established to: ",data)
     
 
