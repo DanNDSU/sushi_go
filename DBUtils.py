@@ -22,25 +22,22 @@ class DBUtils:
         cursor= self.db_cursor
         return cursor
 
-    def addDataToDb(self, curr_state, q_value):
+    def addDataToDb(self, curr_state, q_value, table):
         db_cursor=self.db_cursor
-        selectQuery = 'Select count(*) from q_table where state = %s;'
+        selectQuery = 'Select count(*) from '+table +' where state = %s;'
         db_cursor.execute(selectQuery,[curr_state])
         isStateInDb = str(db_cursor.fetchone())
-        
+        updateQuery = 'update '+table+' set q_value = %s where state = %s; '
+        insertQuery = 'Insert into '+table+'(state,q_value) values(%s,%s); '
         if isStateInDb != '(0,)':
-            db_cursor.execute('''select * from q_table where state= %s;''', [curr_state])
-            updatedQValue= float(q_value)+ float(db_cursor.fetchone()[1])
-            
-            #print('updating q value of '+str(curr_state)+' from '+ str(q_value)+' to '+str(updatedQValue))
-            db_cursor.execute('''update q_table set q_value = %s where state = %s''',(str(updatedQValue),curr_state))
+            db_cursor.execute(updateQuery,[q_value,curr_state])
         
         else:
-            db_cursor.execute('''Insert into q_table(state,q_value) values(%s,%s)''',(curr_state,q_value))
+            db_cursor.execute(insertQuery,[curr_state,q_value])
 
-    def fetchData(self):
+    def fetchData(self, table):
         db_cursor=self.db_cursor
-        selectQuery = 'Select * from q_table;'
+        selectQuery = 'Select * from '+ table+';'
         db_cursor.execute(selectQuery)
         results = db_cursor.fetchall()
         row_dict = {}
