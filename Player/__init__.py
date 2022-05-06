@@ -6,3 +6,4 @@ from .DeepPlayer import *
 from .QStatePlayer import *
 from .Q_DBPlayer import *
 from .QRewardPlayer import *
+from .QRewardPlayer2 import *
