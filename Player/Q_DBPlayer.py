@@ -9,7 +9,7 @@ class Q_DBPlayer(BasePlayer):
         self.db= DBUtils()
         super().__init__(name)
         self.decay_gamma = 0.9
-        self.lr = 0.1
+        self.lr = 0.01
         self.exp_rate = 0.3
         self.hits = 0
         self.querys = 0
