@@ -1,10 +1,12 @@
 from utils import *
 from Player import BasePlayer
+from DBUtils import *
 
 
 class QStatePlayer(BasePlayer):
 
     def __init__(self, name):
+        self.db= DBUtils()
         super().__init__(name)
         self.decay_gamma = 0.9
         self.lr = 0.1
@@ -12,7 +14,7 @@ class QStatePlayer(BasePlayer):
         self.hits = 0
         self.querys = 0
 
-        self.model_dict = {}
+        self.model_dict = self.db.fetchData(table='q_state_player')
 
         self.prepare_for_next_round()
 
@@ -63,10 +65,13 @@ class QStatePlayer(BasePlayer):
                 self.model_dict[state] = 0
             #print("State: "+str(state))
             self.model_dict[state] = (1-self.lr) * self.model_dict[state] + (self.lr * reward)
+            q_state = str(state)
+            qValue = str(self.model_dict[state])
+            self.db.addDataToDb(curr_state=q_state, q_value=qValue, table='q_state_player')
             #print("Model dict"+str(self.model_dict[state]))
             reward *= self.decay_gamma
             #print("Reward: " + str(reward))
-
+        self.db.dbCommit()
         #print(self.model_dict)
         #print()
 
