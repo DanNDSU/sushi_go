@@ -26,6 +26,7 @@ class BasePlayer:
     def feed_reward_score(self, reward):
         return 
 
+    # this is used for QRewardPlayer2, other players don't learn from it.
     def feed_reward_score_plus_minus(self, reward):
         return
 

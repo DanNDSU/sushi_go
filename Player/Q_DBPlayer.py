@@ -1,3 +1,5 @@
+# Q Learning player modified to store its knowledge in a database.
+
 from utils import *
 from Player import BasePlayer
 from DBUtils import *
@@ -45,7 +47,7 @@ class Q_DBPlayer(BasePlayer):
     def get_score(self):
         return get_score(self.board)
 
-    #This function is what calculates the reward - the database connection could go here.
+    #This function is what calculates the reward - the database connection has been added here.
     def feed_reward(self, reward):
         
         for state in self.states_in_game[::-1]:
