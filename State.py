@@ -1,3 +1,11 @@
+"""
+Initial implementation of Sushi Go! by Martin Liu,
+as modified by Manveer Kaur and Dan Nygard.
+Original code base can be found at:
+https://github.com/Gravellent/sushigo-rl
+"""
+
+
 from utils import *
 from Player import *
 
@@ -69,6 +77,7 @@ class State:
             else:
                 p.feed_reward(-1)
                 p.feed_reward_score_plus_minus(p.get_score() - 1)
+                
     #round_per_game is 3 in the original
     def play_games(self, num_of_games=1, round_per_game=1, output_result=False):
         self.stats = [0] * len(self.players)
@@ -105,8 +114,8 @@ if __name__ == '__main__':
     card_pool.extend([10] * 10) """
     state = State(get_actual_card_pool())
     
-    p1 = QPlayer("Dan")
-    p2 = QRewardPlayer2("Manveer")
+    p1 = QStatePlayer("Dan")
+    p2 = QStatePlayer("Manveer")
     
     state.add_player(p1)
     state.add_player(p2)

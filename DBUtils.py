@@ -8,7 +8,7 @@ class DBUtils:
         self.t_port = "5432" 
         self.t_dbname = "postgres"
         self.t_user = "postgres"
-        self.t_pw = ""
+        self.t_pw = "password"
 
         #### Creating database connection
         self.db_conn = psycopg2.connect(host=self.t_host, port=self.t_port, dbname=self.t_dbname, user=self.t_user, password=self.t_pw)
