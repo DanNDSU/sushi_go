@@ -7,7 +7,7 @@ class QPlayer(BasePlayer):
     def __init__(self, name):
         super().__init__(name)
         self.decay_gamma = 0.9
-        self.lr = 0.7
+        self.lr = 0.11
         self.exp_rate = 0.3
         self.hits = 0
         self.querys = 0
@@ -57,8 +57,8 @@ class QPlayer(BasePlayer):
             reward *= self.decay_gamma
             #print("Reward: " + str(reward))
 
-        #print(self.model_dict)
-        #print()
+          #  print(self.model_dict)
+            #print()
 
     def prepare_for_next_round(self):
         super().prepare_for_next_round()
