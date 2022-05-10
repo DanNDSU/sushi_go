@@ -25,4 +25,5 @@ A complete listing of all packages used in our Anaconda environment is in sushi_
 - DBUtils.py contains database connection information
 - test.ipynb is (slightly modified) the Jupyter Notebook of Liu's original training and evaluation games
 - extended_test.ipynb contains further tests of our learning rate and reward function variations
-- 
+- DB_againstAllPlayers.ipynb is a jupyter notebook where we play our Q Player with DB against all other players.
+- DB_withOtherQPlayers.ipynb is where we play our different Q Players against each other.
